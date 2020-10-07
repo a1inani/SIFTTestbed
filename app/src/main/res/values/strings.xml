@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">SIFT Testbed</string>
+
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="title_activity_fullscreen2">FullscreenActivity2</string>
+
+    <string name="title_activity_fullscreen3">FullscreenActivity3</string>
+    <string name="browse_to_directory">Browse to directory</string>
+    <string name="_2_feature_matching">2. Feature Matching</string>
+    <string name="_1_add_training_dataset">1. Select dataset directory</string>
+</resources>

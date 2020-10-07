@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "123081909381",
+    "firebase_url": "https://testdetection-c3c26.firebaseio.com",
+    "project_id": "testdetection-c3c26",
+    "storage_bucket": "testdetection-c3c26.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:123081909381:android:73d43d1fc19d3fd65a35ec",
+        "android_client_info": {
+          "package_name": "io.github.a1inani.sifttestbed"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "123081909381-fjqatcnlskencaj978a8d8as5mt1tohj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9Vy2PDNpVYmq87I-4aMVMkSJf0HhjCtg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "123081909381-fjqatcnlskencaj978a8d8as5mt1tohj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
