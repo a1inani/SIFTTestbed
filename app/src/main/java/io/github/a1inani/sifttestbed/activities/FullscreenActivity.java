@@ -19,8 +19,11 @@ import com.google.gson.Gson;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 
 import common.CSVUtils;
 import common.EarFeature;
@@ -162,18 +165,26 @@ public class FullscreenActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
-            File input1left = new File(strings[0]+"/input1left");
-            File input1left30 = new File(strings[0]+"/input1left30");
-            File input2left = new File(strings[0]+"/input2left");
-            File input2left30 = new File(strings[0]+"/input2left30");
-            featureExtraction(input1left);
-            featureExtraction(input1left30);
-            featureExtraction(input2left);
-            featureExtraction(input2left30);
+            File input1right = new File(strings[0]+"/6D");
+            //File input1left30 = new File(strings[0]+"/input1left30");
+            File input2right = new File(strings[0]+"/6W");
+            //File input2left30 = new File(strings[0]+"/input2left30");
+            try {
+                featureExtraction(input1right);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //featureExtraction(input1left30);
+            try {
+                featureExtraction(input2right);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //featureExtraction(input2left30);
             return null;
         }
 
-        public void featureExtraction(File dir) {
+        public void featureExtraction(File dir) throws IOException {
             if (dir.exists()) {
                 File[] files = dir.listFiles();
                 for (int i = 0; i < files.length; ++i) {
@@ -182,18 +193,21 @@ public class FullscreenActivity extends AppCompatActivity {
                         featureExtraction(file);
                     } else {
                         EarIdentifier identifier = new EarIdentifier(null);
+                        long startTime = System.nanoTime();
                         EarFeature earFeature = identifier.computePathFeatures(file.getPath());
+                        long endTime = System.nanoTime();
+                        writeToFile((endTime - startTime), "FeatureExtraction");
                         Patient patient = new Patient();
                         String name = file.getName();
                         String caseId = name.substring(0, name.length()-4);
                         patient.setFileName(caseId);
                         patient.addFeature(earFeature);
-                        if(caseId.charAt(0) == 'm') {
+                        /*if(caseId.charAt(0) == 'm') {
                             patient.setGender("male");
                         }
                         if(caseId.charAt(0) == 'f') {
                             patient.setGender("female");
-                        }
+                        }*/
                         Log.d("Status", "Adding patient to db");
 
                         if(dir.getName().equals("6W")) {
@@ -201,14 +215,14 @@ public class FullscreenActivity extends AppCompatActivity {
                             values.put(db.COLUMN_FILE_NAME, patient.getFileName());
                             values.put(db.COLUMN_GENDER, patient.getGender());
                             values.put(db.COLUMN_FEATURE, patient.getFeatures().get(0).getFeatures());
-                            db.getWritableDatabase().insert(db.TABLE_6WEEK_LEFT, null, values);
+                            db.getWritableDatabase().insert(db.TABLE_6WEEK_RIGHT, null, values);
                         }
                         if(dir.getName().equals("6D")) {
                             ContentValues values = new ContentValues();
                             values.put(db.COLUMN_FILE_NAME, patient.getFileName());
                             values.put(db.COLUMN_GENDER, patient.getGender());
                             values.put(db.COLUMN_FEATURE, patient.getFeatures().get(0).getFeatures());
-                            db.getWritableDatabase().insert(db.TABLE_6DAY_LEFT, null, values);
+                            db.getWritableDatabase().insert(db.TABLE_6DAY_RIGHT, null, values);
                         }
                         /*if(dir.getName().equals("9M_left30")) {
                             ContentValues values = new ContentValues();
@@ -246,119 +260,8 @@ public class FullscreenActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             p.hide();
             new FeatureMatching().execute();
-
         }
     }
-
-    String[] available = {
-            "6D61",
-            "6D39",
-            "6D69",
-            "6D115",
-            "6D95",
-            "6D26",
-            "6D72",
-            "6D62",
-            "6D51",
-            "6D139",
-            "6D133",
-            "6D137",
-            "6D55",
-            "6D65",
-            "6D87",
-            "6D111",
-            "6D16",
-            "6D5",
-            "6D128",
-            "6D71",
-            "6D33",
-            "6D127",
-            "6D94",
-            "6D54",
-            "6D99",
-            "6D36",
-            "6D74",
-            "6D38",
-            "6D66",
-            "6D108",
-            "6D29",
-            "6D131",
-            "6D52",
-            "6D119",
-            "6D41",
-            "6D6",
-            "6D8",
-            "6D48",
-            "6D20",
-            "6D50",
-            "6D83",
-            "6D118",
-            "6D140",
-            "6D12",
-            "6D90",
-            "6D14",
-            "6D73",
-            "6D80",
-            "6D107",
-            "6D134",
-            "6D68",
-            "6D100",
-            "6D113",
-            "6D117",
-            "6D103",
-            "6D105",
-            "6D17",
-            "6D130",
-            "6D142",
-            "6D21",
-            "6D49",
-            "6D86",
-            "6D91",
-            "6D112",
-            "6D78",
-            "6D93",
-            "6D88",
-            "6D46",
-            "6D10",
-            "6D27",
-            "6D22",
-            "6D47",
-            "6D15",
-            "6D145",
-            "6D89",
-            "6D70",
-            "6D141",
-            "6D35",
-            "6D75",
-            "6D124",
-            "6D144",
-            "6D122",
-            "6D104",
-            "6D92",
-            "6D98",
-            "6D96",
-            "6D102",
-            "6D120",
-            "6D116",
-            "6D129",
-            "6D82",
-            "6D45",
-            "6D138",
-            "6D77",
-            "6D136",
-            "6D37",
-            "6D42",
-            "6D53",
-            "6D79",
-            "6D44",
-            "6D56",
-            "6D57",
-            "6D67",
-            "6D64",
-            "6D9",
-            "6D13",
-            "6D59"
-    };
 
     private class FeatureMatching extends AsyncTask<String, String, String> {
 
@@ -374,23 +277,24 @@ public class FullscreenActivity extends AppCompatActivity {
         }
 
         public void featureMatching() {
-            //ArrayList<Patient> sourcePatients = db.getAll6WeekLeftEars();
+            ArrayList<Patient> sourcePatients = db.getAll6WeekRightEars();
+            ArrayList<Patient> targetPatients = db.getAll6DayRightEars();
             Gson gson = new Gson();
             ArrayList<ArrayList<Integer>> feature1, feature2, feature3, feature4, feature5, feature6, feature7, feature8, feature9, feature10;
             Double distance;
-            //for(Patient patientSource : sourcePatients) {
-            for(String filename : available) {
-                Patient patientSource = db.get6WeekLeftPatient(filename);
+            for(Patient patientSource : sourcePatients) {
+            //for(String filename : available) {
+                //Patient patientSource = db.get6WeekLeftPatient(filename);
                 //feature1 = patientSource.getFeatures().get(0).getFeat();
                 //feature2 = db.get14WeekLeft30Patient(filename).getFeatures().get(0).getFeat();
                 //feature1.addAll(feature2);
                 //patientSource.getFeatures().get(0).setFeatures(gson.toJson(feature1));
-                target.add(patientSource);
+                source.add(patientSource);
 
 
-                Patient p2 = db.get6DayLeftPatient(filename);
-                /*feature3 = p2.getFeatures().get(0).getFeat();
-                feature4 = db.get10WeekLeft30Patient(filename).getFeatures().get(0).getFeat();
+                //Patient p2 = db.get6DayRightPatient(filename);
+                //feature3 = p2.getFeatures().get(0).getFeat();
+                /*feature4 = db.get10WeekLeft30Patient(filename).getFeatures().get(0).getFeat();
                 feature3.addAll(feature4);
                 feature5 = db.get6WeekLeftPatient(filename).getFeatures().get(0).getFeat();
                 feature6 = db.get6WeekLeft30Patient(filename).getFeatures().get(0).getFeat();
@@ -405,16 +309,51 @@ public class FullscreenActivity extends AppCompatActivity {
                 feature3.addAll(feature9);
                 feature3.addAll(feature10);*/
                 //p2.getFeatures().get(0).setFeatures(gson.toJson(feature3));
-                source.add(p2);
+                //source.add(p2);
+            }
+            for(Patient patientTarget : targetPatients) {
+                //for(String filename : available) {
+                feature1 = patientTarget.getFeatures().get(0).getFeat();
+                feature2 = feature1;
+                feature1.addAll(feature2);
+                patientTarget.getFeatures().get(0).setFeatures(gson.toJson(feature1));
+                target.add(patientTarget);
+
+
+                //Patient p2 = db.get6DayRightPatient(filename);
+                //feature3 = p2.getFeatures().get(0).getFeat();
+                /*feature4 = db.get10WeekLeft30Patient(filename).getFeatures().get(0).getFeat();
+                feature3.addAll(feature4);
+                feature5 = db.get6WeekLeftPatient(filename).getFeatures().get(0).getFeat();
+                feature6 = db.get6WeekLeft30Patient(filename).getFeatures().get(0).getFeat();
+                feature3.addAll(feature5);
+                feature3.addAll(feature6);
+                feature7 = db.get6DayLeftPatient(filename).getFeatures().get(0).getFeat();
+                feature8 = db.get6DayLeft30Patient(filename).getFeatures().get(0).getFeat();
+                feature3.addAll(feature7);
+                feature3.addAll(feature8);*/
+                /*feature9 = db.get6DayLeftPatient(filename).getFeatures().get(0).getFeat();
+                feature10 = db.get6DayLeft30Patient(filename).getFeatures().get(0).getFeat();
+                feature3.addAll(feature9);
+                feature3.addAll(feature10);*/
+                //p2.getFeatures().get(0).setFeatures(gson.toJson(feature3));
+                //source.add(p2);
             }
 
             Log.d("Source size", Integer.toString(source.size()));
             Log.d("Target size", Integer.toString(target.size()));
             for(Patient patientSource : source) {
                 for(Patient patientTarget : target) {
-                    if(patientSource.getGender().equals(patientTarget.getGender())) {
+                    //if(patientSource.getGender().equals(patientTarget.getGender())) {
+                    long startTime = System.nanoTime();
                         db.addToScoreMatrix(patientSource, patientTarget, patientSource.getFeatures().get(0).distance(patientTarget.getFeatures().get(0)));
+                    long endTime = System.nanoTime();
+                    try {
+                        writeToFile((endTime - startTime), "FeatureMatching");
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
+                    //}
                 }
             }
         }
@@ -436,8 +375,19 @@ public class FullscreenActivity extends AppCompatActivity {
         }
     }
 
-    private class Results extends AsyncTask<String, String, String> {
+    public void writeToFile(long time, String stage) throws IOException {
+        String baseDir = FullscreenActivity.pathname;
+        String fileName = "/"+stage+".csv";
+        String filePath = baseDir + File.separator + fileName;
+        FileWriter writer = new FileWriter(filePath);
+        CSVUtils.writeLine(writer, Arrays.asList(TimeUnit.MILLISECONDS.toSeconds(time)+" seconds"), '|');
+        writer.flush();
+        writer.close();
+    }
 
+    String[] available = {};
+
+    private class Results extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... strings) {
             //File dir = new File(strings[0]);
@@ -450,7 +400,6 @@ public class FullscreenActivity extends AppCompatActivity {
             return null;
         }
 
-        @RequiresApi(api = Build.VERSION_CODES.O)
         public void results() throws IOException {
             String baseDir = FullscreenActivity.pathname;
             String fileName = "/Results.csv";

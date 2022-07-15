@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: yogesh.firzen:FilesLister:1.0.1.g@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/6ce756ee8102c286f054a06088256a1d/transformed/jetified-FilesLister-1.0.1.g/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6ce756ee8102c286f054a06088256a1d/transformed/jetified-FilesLister-1.0.1.g/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/6ce756ee8102c286f054a06088256a1d/transformed/jetified-FilesLister-1.0.1.g/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/yogesh.firzen/FilesLister/1.0.1.g/37859785c9c214a87ef24b187866e0cc14fefd7f/FilesLister-1.0.1.g-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/yogesh.firzen/FilesLister/1.0.1.g/f6be62700c40d9b83c9eec3ac55c736de3e5807d/FilesLister-1.0.1.g-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

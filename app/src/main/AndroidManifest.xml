@@ -14,19 +14,10 @@
         android:theme="@style/AppTheme"
         android:largeHeap="true">
         <activity
-            android:name=".activities.FullscreenActivity2"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_fullscreen2"
-            android:parentActivityName=".activities.FullscreenActivity"
-            android:theme="@style/FullscreenTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="io.github.a1inani.sifttestbed.activities.FullscreenActivity" />
-        </activity>
-        <activity
             android:name=".activities.FullscreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
+            android:exported="true"
             android:theme="@style/FullscreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

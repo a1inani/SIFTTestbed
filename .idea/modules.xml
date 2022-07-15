@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SIFTTestbed.iml" filepath="$PROJECT_DIR$/.idea/modules/SIFTTestbed.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/SIFTTestbed.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/SIFTTestbed.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/SIFTTestbed.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/SIFTTestbed.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/SIFTTestbed.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/SIFTTestbed.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/SIFTTestbed.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/SIFTTestbed.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/openCVLibrary2411/SIFTTestbed.openCVLibrary2411.iml" filepath="$PROJECT_DIR$/.idea/modules/openCVLibrary2411/SIFTTestbed.openCVLibrary2411.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/openCVLibrary2411/SIFTTestbed.openCVLibrary2411.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/openCVLibrary2411/SIFTTestbed.openCVLibrary2411.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/openCVLibrary2411/SIFTTestbed.openCVLibrary2411.main.iml" filepath="$PROJECT_DIR$/.idea/modules/openCVLibrary2411/SIFTTestbed.openCVLibrary2411.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/openCVLibrary2411/SIFTTestbed.openCVLibrary2411.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/openCVLibrary2411/SIFTTestbed.openCVLibrary2411.unitTest.iml" />
+    </modules>
+  </component>
+</project>

@@ -35,7 +35,7 @@ public class EarIdentifier {
         Mat descriptors1 = new Mat();
         MatOfKeyPoint keypoints1 = new MatOfKeyPoint();
         image1 = Highgui.imread(path, Highgui.IMREAD_GRAYSCALE);
-        Imgproc.resize(image1, image1, new Size(0,0), (double)150/image1.width(), (double)150/image1.width(), INTER_AREA);
+        Imgproc.resize(image1, image1, new Size(0,0), (double)150/image1.width(), (double)150/image1.height(), INTER_AREA);
         Imgproc.equalizeHist(image1, image1);
         FeatureDetector detector = FeatureDetector.create(FeatureDetector.SIFT);
         detector.detect(image1, keypoints1);
